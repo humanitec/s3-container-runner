@@ -1,0 +1,51 @@
+# Resource Definition provisioning an S3 bucket with the s3-container-runner.
+#
+# The runner generates nothing: the bucket name is generated once by the templates,
+# kept in the resource state, and reused on every later run and on destroy.
+apiVersion: entity.humanitec.io/v1b1
+kind: Definition
+metadata:
+  id: s3-container
+entity:
+  name: S3 bucket (container runner)
+  type: s3
+  driver_type: humanitec/container-builtin
+  driver_inputs:
+    values:
+      job:
+        image: ghcr.io/humanitec/s3-container-runner:<version>
+        # Without AWS_CREDENTIALS_FILE, credentials come from this service account's IAM role
+        # (IRSA or EKS Pod Identity); see the README for the required permissions.
+        service_account: humanitec-runner
+        namespace: humanitec-runner
+        shared_directory: /home/runner/workspace
+        variables:
+          AWS_REGION: eu-west-1
+          # Optional: static credentials instead of the service account's role; see secret_refs below.
+          # AWS_CREDENTIALS_FILE: aws-credentials.json   # relative to shared_directory
+      templates:
+        # Reuse the name stored in state; generate it only on the first run.
+        # S3 names are global: lowercase, 3-63 characters. "hum-" + 20 random characters is 24.
+        init: |
+          {{- if and $.state (hasKey $.state "bucket") }}
+          bucket: {{ $.state.bucket }}
+          {{- else }}
+          bucket: hum-{{ randAlphaNum 20 | lower }}
+          {{- end }}
+        # Persisted in the Resource cookie and exposed as $.state on the next run.
+        state: |
+          bucket: {{ $.init.bucket }}
+        outputs:
+          job: |
+            {{- $job := deepCopy $.driver.values.job -}}
+            {{- $_ := set $job.variables "BUCKET_NAME" $.init.bucket -}}
+            {{ $job | toRawJson }}
+    # Only with AWS_CREDENTIALS_FILE: the file is mounted in shared_directory, never put in the Job spec.
+    # secret_refs:
+    #   files:
+    #     # {"access_key_id": "...", "secret_access_key": "..."}
+    #     aws-credentials.json:
+    #       store: my-secret-store
+    #       ref: aws/s3-runner-credentials
+  criteria:
+    - class: default

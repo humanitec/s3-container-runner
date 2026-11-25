@@ -1,0 +1,16 @@
+# Binaries and build output
+/bin/
+
+# Test and coverage output
+*.out
+coverage.*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+.claude/settings.local.json
