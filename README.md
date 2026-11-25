@@ -168,4 +168,8 @@ make image VERSION=0.1.0
 docker push ghcr.io/humanitec/s3-container-runner:0.1.0
 ```
 
-The package must be public on ghcr.io, like `ghcr.io/humanitec/rdbms-container-runner`. Set this once in the package settings after the first push.
+The package is public on ghcr.io: `ghcr.io/humanitec/s3-container-runner`.
+
+## License
+
+Licensed under the [Apache License 2.0](LICENSE).
