@@ -134,7 +134,7 @@ Scoped to the name prefix used in the example definition:
 | `make test-integration` | Builds the image, then runs the unit and integration tests (needs Docker) |
 | `make lint` | `golangci-lint run`, pinned in `tools/go.mod`, including the integration-tagged code |
 | `make fmt` | `golangci-lint fmt` |
-| `make image` | Builds `ghcr.io/humanitec/s3-container-runner:$(VERSION)` (needs Docker) |
+| `make image` | Builds `ghcr.io/humanitec-architecture/s3-container-runner:$(VERSION)` (needs Docker) |
 | `make clean` | Removes `bin/` and the image built by `make image` |
 
 Code layout:
@@ -155,7 +155,7 @@ LocalStack isn't used: since March 2026 its image needs an auth token tied to a 
 
 CI ([`.github/workflows/ci.yaml`](.github/workflows/ci.yaml)) runs lint, unit tests and integration tests on every push and pull request.
 
-Pushing a semver tag such as `v0.1.0` also builds the image for `linux/amd64` and `linux/arm64`, and pushes it as `ghcr.io/humanitec/s3-container-runner:0.1.0`. A stable tag also updates `latest`.
+Pushing a semver tag such as `v0.1.0` also builds the image for `linux/amd64` and `linux/arm64`, and pushes it as `ghcr.io/humanitec-architecture/s3-container-runner:0.1.0`. A stable tag also updates `latest`.
 
 ```sh
 git tag v0.1.0 && git push origin v0.1.0
@@ -165,10 +165,10 @@ To push by hand instead:
 
 ```sh
 make image VERSION=0.1.0
-docker push ghcr.io/humanitec/s3-container-runner:0.1.0
+docker push ghcr.io/humanitec-architecture/s3-container-runner:0.1.0
 ```
 
-The package is public on ghcr.io: `ghcr.io/humanitec/s3-container-runner`.
+The package is public on ghcr.io: `ghcr.io/humanitec-architecture/s3-container-runner`.
 
 ## License
 

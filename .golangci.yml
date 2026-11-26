@@ -46,4 +46,4 @@ formatters:
   settings:
     goimports:
       local-prefixes:
-        - github.com/humanitec/s3-container-runner
+        - github.com/humanitec-architecture/s3-container-runner

@@ -1,4 +1,4 @@
-module github.com/humanitec/s3-container-runner/tools
+module github.com/humanitec-architecture/s3-container-runner/tools
 
 go 1.26.0
 

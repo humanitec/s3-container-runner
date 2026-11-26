@@ -14,7 +14,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/humanitec/s3-container-runner/internal/contract"
+	"github.com/humanitec-architecture/s3-container-runner/internal/contract"
 )
 
 const (

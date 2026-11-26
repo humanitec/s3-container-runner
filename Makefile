@@ -1,6 +1,6 @@
 BINARY  := s3-container-runner
 VERSION ?= dev
-IMAGE   ?= ghcr.io/humanitec/$(BINARY):$(VERSION)
+IMAGE   ?= ghcr.io/humanitec-architecture/$(BINARY):$(VERSION)
 
 # Pinned in tools/go.mod.
 GOLANGCI_LINT := go tool -modfile=tools/go.mod golangci-lint

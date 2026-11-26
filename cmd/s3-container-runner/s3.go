@@ -16,7 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go"
 
-	"github.com/humanitec/s3-container-runner/internal/contract"
+	"github.com/humanitec-architecture/s3-container-runner/internal/contract"
 )
 
 // s3API is the subset of the S3 client the runner calls; tests use a fake.

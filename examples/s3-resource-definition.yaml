@@ -13,7 +13,7 @@ entity:
   driver_inputs:
     values:
       job:
-        image: ghcr.io/humanitec/s3-container-runner:<version>
+        image: ghcr.io/humanitec-architecture/s3-container-runner:<version>
         # Without AWS_CREDENTIALS_FILE, credentials come from this service account's IAM role
         # (IRSA or EKS Pod Identity); see the README for the required permissions.
         service_account: humanitec-runner
